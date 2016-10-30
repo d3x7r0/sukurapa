@@ -104,7 +104,8 @@ let settings = {
         "statsFile": "stats.csv", // The output file for the statistics (mandatory)
         "deleteOnStart": false // whether to delete the files before starting (default: false)
         "separator": ",", // The data separator (default: comma)
-        "lineSeparator": "\n" // The line separator (default: new line)
+        "lineSeparator": "\n", // The line separator (default: new line)
+        "arraySeparator": ";" // The array separator (default: semicolon)
     }
 }
 ```
