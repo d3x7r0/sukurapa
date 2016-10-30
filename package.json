@@ -1,0 +1,40 @@
+{
+  "name": "sukurapa",
+  "version": "0.0.1",
+  "description": "Framework for data gathering",
+  "main": "lib/index.js",
+  "author": "Luis Nabais",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "nano": "^6.2.0",
+    "winston": "^2.2.0"
+  },
+  "engines": {
+    "node": ">= 6.9.x"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "indent": [
+        "error",
+        4
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-console": 0,
+      "no-unused-vars": 1,
+      "quotes": 0
+    }
+  }
+}
