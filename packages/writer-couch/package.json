@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Luis Nabais",
   "license": "MIT",
+  "repository": "github:d3x7r0/sukurapa",
   "dependencies": {
     "nano": "^6.2.0",
     "winston": "^2.2.0"
