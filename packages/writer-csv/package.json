@@ -1,0 +1,17 @@
+{
+  "name": "sukurapa-writer-csv",
+  "version": "0.0.3",
+  "description": "CSV writer for the Sukurapa data gathering framework",
+  "main": "index.js",
+  "author": "Luis Nabais",
+  "license": "MIT",
+  "dependencies": {
+    "winston": "^2.2.0"
+  },
+  "peerDependencies": {
+    "sukurapa": "^0.0.3"
+  },
+  "engines": {
+    "node": ">= 8.x"
+  }
+}

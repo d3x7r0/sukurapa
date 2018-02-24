@@ -1,0 +1,32 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "indent": [
+      "warn",
+      4,
+      {
+        "FunctionDeclaration": {
+          "parameters": "first"
+        }
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "no-console": 0,
+    "no-unused-vars": 1,
+    "quotes": 0
+  }
+}
