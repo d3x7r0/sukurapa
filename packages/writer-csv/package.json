@@ -1,6 +1,6 @@
 {
   "name": "sukurapa-writer-csv",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "CSV writer for the Sukurapa data gathering framework",
   "main": "index.js",
   "author": "Luis Nabais",
