@@ -1,6 +1,6 @@
 {
   "name": "sukurapa-writer-couch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CouchDB writer for the Sukurapa data gathering framework",
   "main": "index.js",
   "author": "Luis Nabais",
