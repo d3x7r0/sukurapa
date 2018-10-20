@@ -1,12 +1,11 @@
 {
   "name": "sukurapa",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Framework for data gathering",
   "main": "lib/index.js",
   "author": "Luis Nabais",
   "license": "MIT",
   "repository": "github:d3x7r0/sukurapa",
-  "dependencies": {},
   "engines": {
     "node": ">= 8.x",
     "winston": "^2.2.0"
