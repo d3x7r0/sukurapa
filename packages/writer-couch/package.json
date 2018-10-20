@@ -1,5 +1,5 @@
 {
-  "name": "sukurapa-writer-couch",
+  "name": "@sukurapa/writer-couch",
   "version": "0.2.0",
   "description": "CouchDB writer for the Sukurapa data gathering framework",
   "main": "index.js",

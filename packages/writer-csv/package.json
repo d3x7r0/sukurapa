@@ -1,5 +1,5 @@
 {
-  "name": "sukurapa-writer-csv",
+  "name": "@sukurapa/writer-csv",
   "version": "0.2.0",
   "description": "CSV writer for the Sukurapa data gathering framework",
   "main": "index.js",
