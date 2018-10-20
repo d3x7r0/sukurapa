@@ -46,7 +46,7 @@ class MyReader {
 
 ```javascript
 const Sukurapa = require('sukurapa');
-const CouchWriter = require('sukurapa-writer-couch');
+const CouchWriter = require('@sukurapa/writer-couch');
 
 // Build a new instance of the library
 const instance = new Sukurapa({

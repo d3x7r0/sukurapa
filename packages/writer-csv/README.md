@@ -6,6 +6,8 @@ Simple file-based CSV writer for [Sukurapa](../../).
 The CSV writer takes file names for data and statistics output files. It also requires a list of columns to print to the file (the id is always written first)
 
 ```javascript
+const CSVWriter = require('@sukurapa/writer-csv');
+
 const instance = new CSVWriter({
     "columns": [ // List of columns to output
         {
@@ -26,7 +28,7 @@ const instance = new CSVWriter({
 
 Install using [NPM](http://npmjs.com):
 
-`npm install sukurapa-writer-csv`
+`npm install @sukurapa/writer-csv`
 
 ## License
 

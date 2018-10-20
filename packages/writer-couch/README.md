@@ -8,6 +8,8 @@ The CouchDB writer takes a connection string and a store name. If the store does
 There's also the option to delete the store before each run.
 
 ```javascript
+const CouchWriter = require('@sukurapa/writer-couch');
+
 const instance = new CouchWriter({
     "connection": "http://127.0.0.1:5984", // The connections string (mandatory)
     "storeName": "my_store", // The store name (mandatory)
@@ -19,7 +21,7 @@ const instance = new CouchWriter({
 
 Install using [NPM](http://npmjs.com):
 
-`npm install sukurapa-writer-couch`
+`npm install @sukurapa/writer-couch`
 
 ## License
 
