@@ -6,13 +6,12 @@
   "author": "Luis Nabais",
   "license": "MIT",
   "repository": "github:d3x7r0/sukurapa",
-  "dependencies": {
+  "dependencies": {},
+  "engines": {
+    "node": ">= 8.x",
     "winston": "^2.2.0"
   },
-  "engines": {
-    "node": ">= 8.x"
-  },
   "devDependencies": {
-    "lerna": "^2.9.0"
+    "lerna": "^3.4.3"
   }
 }
