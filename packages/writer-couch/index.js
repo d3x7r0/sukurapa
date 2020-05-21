@@ -1,114 +1,104 @@
-const nano = require('nano');
-const Logger = require('winston');
-const {promisify} = require('util');
+const nano = require('nano')
 
-const TAG = "COUCH";
+const TAG = 'COUCH'
 
-const STATS_KEY_NAME = "STATS";
+const STATS_KEY_NAME = 'STATS'
 
-const DEFAULT_DELETE_STORE = false;
+const DEFAULT_DELETE_STORE = false
 
 class CouchWriter {
-    constructor({
-                    connection,
-                    storeName,
-                    deleteOnStart = DEFAULT_DELETE_STORE
-                } = {}) {
+  constructor({
+    connection,
+    storeName,
+    deleteOnStart = DEFAULT_DELETE_STORE,
+  } = {}) {
 
-        if (!connection || !storeName) {
-            throw new Error(`[${TAG}] Missing connection or store name`);
-        }
-
-        this._storeName = storeName;
-        this._connection = connection;
-
-        this._statsRevId = undefined;
-
-        this._deleteOnStart = deleteOnStart;
+    if (!connection || !storeName) {
+      throw new Error(`[${TAG}] Missing connection or store name`)
     }
 
-    async prepare() {
-        Logger.info(`[${TAG}] Preparing output couchdb store "${this._storeName}"`);
+    this._storeName = storeName
+    this._connection = connection
 
-        this._nano = nano(`${this._connection}`);
+    this._statsRevId = undefined
 
-        const db = this._nano.use(this._storeName);
+    this._deleteOnStart = deleteOnStart
+  }
 
-        this._dbInsert = promisify(db.insert);
-        this._dbBulkInsert = promisify(db.bulk);
+  async prepare() {
+    console.info(`[${TAG}] Preparing output couchdb store "${this._storeName}"`)
 
-        const dbGet = promisify(db.get);
-        const dbCreate = promisify(this._nano.db.create);
+    this._nano = nano(`${this._connection}`)
 
-        if (this._deleteOnStart) {
-            const dbDelete = promisify(this._nano.db.destroy);
+    this._db = this._nano.use(this._storeName)
 
-            await dbDelete(this._storeName);
-            await dbCreate(this._storeName);
-        } else {
-            try {
-                await dbCreate(this._storeName);
-            } catch (err) {
-                if (err.error !== "file_exists") throw err;
-            }
-        }
-
-        try {
-            const stats = await dbGet(STATS_KEY_NAME);
-
-            this._statsRevId = stats['_rev'];
-        } catch (err) {
-            if (err.error !== "not_found") throw err;
-        }
-
-        return this;
+    if (this._deleteOnStart) {
+      await this._nano.db.destroy(this._storeName)
+      await this._nano.db.create(this._storeName)
+    } else {
+      try {
+        await this._nano.db.create(this._storeName)
+      } catch (err) {
+        if (err.error !== 'file_exists') throw err
+      }
     }
 
-    async save(data) {
-        Logger.debug(`[${TAG}] Writing ${data.length} lines`);
+    try {
+      const stats = await this._db.get(STATS_KEY_NAME)
 
-        const docs = data
-            .filter(filterEntry)
-            .map(prepareEntry);
-
-        await this._dbBulkInsert({docs: docs});
-
-        return docs.length;
+      this._statsRevId = stats['_rev']
+    } catch (err) {
+      if (err.error !== 'not_found') throw err
     }
 
-    finish(stats) {
-        Logger.info(`[${TAG}] Finishing up`);
+    return this
+  }
 
-        return this.updateStats(stats);
-    }
+  async save(data) {
+    console.debug(`[${TAG}] Writing ${data.length} lines`)
 
-    async updateStats(stats) {
-        Logger.debug(`[${TAG}] Updating status`);
+    const docs = data
+      .filter(filterEntry)
+      .map(prepareEntry)
 
-        const data = Object.assign({}, stats, {
-            _id: STATS_KEY_NAME,
-            _rev: this._statsRevId
-        });
+    await this._db.bulk({ docs: docs })
 
-        const res = await this._dbInsert(data);
+    return docs.length
+  }
 
-        this._statsRevId = res["rev"];
-    }
+  finish(stats) {
+    console.info(`[${TAG}] Finishing up`)
+
+    return this.updateStats(stats)
+  }
+
+  async updateStats(stats) {
+    console.debug(`[${TAG}] Updating status`)
+
+    const data = Object.assign({}, stats, {
+      _id: STATS_KEY_NAME,
+      _rev: this._statsRevId,
+    })
+
+    const res = await this._db.insert(data)
+
+    this._statsRevId = res['rev']
+  }
 }
 
 function filterEntry(entry) {
-    if (!entry || entry.id === undefined) {
-        console.warn(`[${TAG}] Missing entry id, skipping save`, entry);
-        return false;
-    }
+  if (!entry || entry.id === undefined) {
+    console.warn(`[${TAG}] Missing entry id, skipping save`, entry)
+    return false
+  }
 
-    return true;
+  return true
 }
 
 function prepareEntry(entry) {
-    return Object.assign({}, entry, {
-        _id: entry["id"]
-    });
+  return Object.assign({}, entry, {
+    _id: entry['id'],
+  })
 }
 
-module.exports = CouchWriter;
+module.exports = CouchWriter
