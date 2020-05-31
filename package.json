@@ -1,6 +1,6 @@
 {
   "name": "sukurapa",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Framework for data gathering",
   "main": "lib/index.js",
   "author": "Luis Nabais",
