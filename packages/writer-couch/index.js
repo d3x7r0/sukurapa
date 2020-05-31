@@ -33,7 +33,12 @@ class CouchWriter {
     this._db = this._nano.use(this._storeName)
 
     if (this._deleteOnStart) {
-      await this._nano.db.destroy(this._storeName)
+      try {
+        await this._nano.db.destroy(this._storeName)
+      } catch (err) {
+        if (err.error !== 'not_found') throw err
+      }
+
       await this._nano.db.create(this._storeName)
     } else {
       try {
