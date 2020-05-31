@@ -6,9 +6,11 @@
   "author": "Luis Nabais",
   "license": "MIT",
   "repository": "github:d3x7r0/sukurapa",
-  "peerDependencies": {
-    "nano": "^7.0.0",
+  "dependencies": {
     "sukurapa": "^0.4.0"
+  },
+  "peerDependencies": {
+    "nano": "^7.0.0"
   },
   "engines": {
     "node": ">= 8.x"
