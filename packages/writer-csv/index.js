@@ -65,7 +65,9 @@ class CSVWriter {
 
     const res = data.map(this._printCSVLine.bind(this)).join(this._lineSeparator)
 
-    await appendFile(this._outFile, res + this._lineSeparator)
+    if (res.length) {
+      await appendFile(this._outFile, res + this._lineSeparator)
+    }
 
     return res.length
   }
