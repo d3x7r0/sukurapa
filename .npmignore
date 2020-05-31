@@ -1,4 +1,7 @@
 *.iml
 .DS_Store
 node_modules
+packages
 *.log
+.eslintrc
+.editorconfig
